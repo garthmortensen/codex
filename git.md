@@ -41,22 +41,63 @@ git push --force-with-lease  # Safer force push
 git log                      # Show commit history
 git log --oneline            # Compact commit history
 git log --graph --oneline    # Visual branch history
+git log --pretty=format:"%h %an %ar - %s"  # Custom format
+git log --pretty=oneline     # One line per commit
+git log --pretty=short       # Short format
+git log --pretty=full        # Full format
+git log --graph --pretty=format:"%C(yellow)%h%Creset -%C(red)%d%Creset %s %C(green)(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit  # Colorful graph
+git log --since="2 weeks ago"  # Commits since date
+git log --until="yesterday"  # Commits until date
+git log --author="John"      # Commits by author
+git log -p                   # Show patches/diffs
+git log --stat               # Show file statistics
+git log --name-only          # Show only file names
+git log --follow filename    # Follow file renames
 git show commit-hash         # Show specific commit details
 git diff                     # Show unstaged changes
 git diff --staged            # Show staged changes
+git diff HEAD~1              # Compare with previous commit
+git diff branch1..branch2    # Compare branches
 git blame file               # Show who changed each line
+git show --name-only HEAD    # Show files in last commit
 ```
 
-## Undoing Changes
+## Git Status & Porcelain
 
 ```bash
-git reset HEAD file          # Unstage file
-git checkout -- file         # Discard changes to file
-git reset --soft HEAD~1      # Undo last commit, keep changes
-git reset --hard HEAD~1      # Undo last commit, discard changes
-git revert commit-hash       # Create new commit undoing changes
-git stash                    # Temporarily save changes
-git stash pop                # Apply and remove latest stash
+git status                   # Show working directory status
+git status -s                # Short status format
+git status --porcelain       # Machine-readable status
+git status --porcelain=v2    # Enhanced porcelain format
+git status -b                # Show branch info
+git status --ignored         # Show ignored files too
+git status --untracked-files=all  # Show all untracked files
+```
+
+## Advanced Log Formatting
+
+```bash
+# Custom log with hash, author, date, and message
+git log --pretty=format:"%h - %an, %ar : %s"
+
+# Show commits with file changes
+git log --name-status
+
+# Show commits affecting specific file
+git log --follow -- filename
+
+# Show merge commits only
+git log --merges
+
+# Show commits between tags/branches
+git log tag1..tag2
+git log main..feature-branch
+
+# Show commits with word diff
+git log -p --word-diff
+
+# Show commits in last 5 days with author
+git log --since="5 days ago" --pretty=format:"%h %an %s"
 ```
 
 ## Data Science Workflow

@@ -13,7 +13,7 @@ grep -E "(error|warning)" log  # Extended regex (OR)
 grep -l "pandas" *.py         # Show only filenames
 ```
 
-## Data Science Power Combinations
+## Combinations
 
 ```bash
 # 1. Find Python files using sklearn

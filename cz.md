@@ -1,4 +1,4 @@
-# commitizen.md
+# cz.md
 
 ## Commit Operations
 
