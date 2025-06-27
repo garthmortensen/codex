@@ -16,6 +16,17 @@ from textual.reactive import reactive
 from textual.message import Message
 from textual.binding import Binding
 
+# Try to import newer splitter widgets, fallback to basic containers
+try:
+    from textual.widgets import VerticalSplitter, HorizontalSplitter
+    SPLITTER_AVAILABLE = True
+except ImportError:
+    try:
+        from textual.containers import VerticalSplitter, HorizontalSplitter  
+        SPLITTER_AVAILABLE = True
+    except ImportError:
+        SPLITTER_AVAILABLE = False
+
 class CheatsheetManager(App):
     """A Textual app for browsing cheatsheets"""
     
@@ -56,6 +67,8 @@ class CheatsheetManager(App):
         self.cheatsheets_dir = Path(cheatsheets_dir or Path.home() / "cheatsheets")
         self.cheatsheets = {}
         self.filtered_cheatsheets = {}
+        self.file_contents = {}  # Cache for file contents
+        self.search_results = {}  # Cache for search results with line numbers
         
     def compose(self) -> ComposeResult:
         """Create child widgets for the app"""
@@ -93,6 +106,9 @@ class CheatsheetManager(App):
             return
             
         for md_file in self.cheatsheets_dir.glob("*.md"):
+            # Skip README.md
+            if md_file.name == "README.md":
+                continue
             name = md_file.stem.replace("-", " ").replace("_", " ").title()
             self.cheatsheets[name] = md_file
             
@@ -117,7 +133,23 @@ class CheatsheetManager(App):
             return
             
         for i, (name, filepath) in enumerate(sorted(self.filtered_cheatsheets.items()), 1):
-            label_text = f"{i:2d}. {name.lower()}"
+            # Check if we have search results with sections for this file
+            if name in self.search_results:
+                sections = self.search_results[name]
+                if len(sections) == 1:
+                    # Show single section
+                    label_text = f"{i:2d}. {name.lower()} (section: {sections[0]})"
+                elif len(sections) <= 3:
+                    # Show multiple sections
+                    sections_str = ", ".join(sections)
+                    label_text = f"{i:2d}. {name.lower()} (sections: {sections_str})"
+                else:
+                    # Show count and first few sections if many matches
+                    sections_str = ", ".join(sections[:2])
+                    label_text = f"{i:2d}. {name.lower()} ({len(sections)} sections: {sections_str}...)"
+            else:
+                label_text = f"{i:2d}. {name.lower()}"
+            
             label = Label(label_text, classes="list-item-label")
             list_item = ListItem(label)
             list_item._cheatsheet_name = name
@@ -125,24 +157,12 @@ class CheatsheetManager(App):
             list_view.append(list_item)
     
     def _filter_cheatsheets(self, search_term: str):
-        """Filter cheatsheets based on search term (name or number)"""
+        """Filter cheatsheets based on search term in file contents"""
         if not search_term:
             self.filtered_cheatsheets = self.cheatsheets.copy()
         else:
-            results = {}
-            # Get a sorted list of all cheatsheets to associate numbers with them
-            sorted_cheatsheets = sorted(self.cheatsheets.items())
-            
-            for i, (name, path) in enumerate(sorted_cheatsheets, 1):
-                # Check if the search term is in the name (case-insensitive)
-                name_match = search_term.lower() in name.lower()
-                # Check if the search term is the number of the item in the list
-                number_match = search_term == str(i)
-                
-                if name_match or number_match:
-                    results[name] = path
-            
-            self.filtered_cheatsheets = results
+            # Search through file contents instead of filenames
+            self.filtered_cheatsheets = self._search_file_contents(search_term)
 
         self._update_list()
         
@@ -150,13 +170,26 @@ class CheatsheetManager(App):
         if search_term:
             count = len(self.filtered_cheatsheets)
             self.query_one("#status", Static).update(
-                f"Search: '{search_term}' - {count} matches"
+                f"Content search: '{search_term}' - {count} files contain this text"
             )
         else:
             self.query_one("#status", Static).update(
-                f"Found {len(self.cheatsheets)} cheatsheets | Use Ctrl+F to search"
+                f"Found {len(self.cheatsheets)} cheatsheets | Use Ctrl+F to search content"
             )
     
+    def _add_line_numbers_to_markdown(self, content: str) -> str:
+        """Add line numbers to markdown content with proper line breaks"""
+        lines = content.split('\n')
+        numbered_lines = []
+        
+        for i, line in enumerate(lines, 1):
+            # Use a format that preserves line breaks and doesn't interfere with markdown
+            line_num = f"{i:4d}:"
+            # Add two spaces at the end to force a line break in markdown
+            numbered_lines.append(f"{line_num} {line}  ")
+        
+        return '\n'.join(numbered_lines)
+
     def _render_cheatsheet(self, filepath):
         """Render markdown file in the content panel"""
         try:
@@ -177,6 +210,72 @@ class CheatsheetManager(App):
         except Exception as e:
             content_widget = self.query_one("#content", Markdown)
             content_widget.update(f"## Error reading file: {e}")
+    
+    def _load_file_contents(self):
+        """Load and cache contents of all markdown files for searching"""
+        self.file_contents = {}
+        for name, filepath in self.cheatsheets.items():
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    self.file_contents[name] = f.read().lower()  # Store as lowercase for case-insensitive search
+            except Exception:
+                self.file_contents[name] = ""  # Empty content if file can't be read
+
+    def _find_section_for_line(self, filepath, line_number):
+        """Find the markdown section/header that contains the given line number"""
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+            
+            current_section = "Top"  # Default section name
+            
+            # Work backwards from the match line to find the most recent header
+            for i in range(line_number - 1, -1, -1):
+                line = lines[i].strip()
+                if line.startswith('#'):
+                    # Extract header text, removing the # symbols and cleaning up
+                    header_text = line.lstrip('#').strip()
+                    # Remove .md from header if it exists (our filename headers)
+                    if header_text.endswith('.md'):
+                        header_text = header_text[:-3]
+                    current_section = header_text
+                    break
+            
+            return current_section
+            
+        except Exception:
+            return "Unknown"
+
+    def _search_file_contents(self, search_term: str):
+        """Search through file contents and return matching files with sections"""
+        if not search_term:
+            self.search_results = {}
+            return self.cheatsheets.copy()
+        
+        results = {}
+        self.search_results = {}
+        search_term_lower = search_term.lower()
+        
+        for name, filepath in self.cheatsheets.items():
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    lines = f.readlines()
+                
+                matching_sections = []
+                for line_num, line in enumerate(lines, 1):
+                    if search_term_lower in line.lower():
+                        section = self._find_section_for_line(filepath, line_num)
+                        if section not in matching_sections:
+                            matching_sections.append(section)
+                
+                if matching_sections:
+                    results[name] = filepath
+                    self.search_results[name] = matching_sections
+                    
+            except Exception:
+                continue
+        
+        return results
     
     def on_input_changed(self, event: Input.Changed) -> None:
         """Handle search input changes"""

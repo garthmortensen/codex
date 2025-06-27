@@ -1,4 +1,4 @@
-# Fedora.md
+# fedora.md
 
 ## Package Management - DNF
 
