@@ -9,12 +9,11 @@ ensemble  # module
 RandomForestClassifier  # class
 ```
 
-## Variables and Basic Terminology
+## Basic Terminology
 
-### Variables
+### Variables and Naming
 
 In Java, you might use a leading underscore for attributes:
-
 ```python
 # Java style
 def fun1(_data, _val):
@@ -31,10 +30,9 @@ A single underscore means the var/method is private, so `_data` should not be us
 
 A double underscore (dunder) variable, `__data` is just an extra level of "don't use this from outside the class".
 
-### Parameters, arguments
+### Parameters vs Arguments
 
-This is a parameter vs argument. Parameters are in function definitions, arguments are what you feed it.
-
+This is a parameter vs argument. Parameters are in function definitions, arguments are what you feed it:
 ```python
 def myfunction(parameter1, parameter2):
     return parameter1 + parameter2
@@ -42,44 +40,43 @@ def myfunction(parameter1, parameter2):
 result = myfunction(argument1, argument2)
 ```
 
-### Duck typing
+### Duck Typing
 
-it's evaluated at runtime.
-
+It's evaluated at runtime.
+```
 1 + 2
 a + b
+```
+Its evaluated line by line, as opposed to the entire module compiled.
 
-its evaluated line by line, as opposed to the entire module compiled. 
-
-### C python
+### C Python
 
 interpreter = C python = python.exe
 ```bash
 python()  # or python filename.py
 quit()
 ```
-now you've closed the interpreter.
+Now you've closed the interpreter.
 
-### Comments vs dockstring
+### Comments vs Docstring
 
 `#` comments are by dev, for dev
 
-`"""docstring"""` by dev for user. available via __doc__ attribute. This is the interface documentation. Should have one for each module, function, class.
+`"""docstring"""` by dev for user. Available via __doc__ attribute. This is the interface documentation. Should have one for each module, function, class.
 
-### Splats, asterix
+### Splats, Asterisk
 
-Star/splat/astrix (*) = any number of 0...n.
+Star/splat/asterisk (*) = any number of 0...n.
 ```python
 # print(*objects, sep=' ', end='\n', ...)
 print("hello", 34, "my name is ", name)
 ```
 
-### Walrus expressions
+### Walrus Expressions
 
 A walrus expression `:=` both assigns and evaluates.
 
 Lore has it that Guido quit python development over walrus expressions.
-
 ```python
 if (n := len(a)) > 10:
     print(f"List is too long ({n} elements, expected <= 10)")
@@ -87,8 +84,7 @@ if (n := len(a)) > 10:
 
 ## Conditionals
 
-Nested if statements with insurance premium predictor
-
+Nested if statements with insurance premium predictor:
 ```python
 accident = True
 at_fault = False
@@ -113,16 +109,16 @@ else:
 print(f"Prediction: {increase_insurance_premium}")
 ```
 
-Ternary operator is a "backwards if".
+Ternary operator is a "backwards if":
 ```python
 answer = 'is' if mytrip.is_round_trip() else 'is not'
 ```
 
 ## Loops
 
-Range loops
+### Range Loops
 
-``` python
+```python
 # Loop through a range of numbers (0 through 4)
 for x in range(5):
     print(x)
@@ -132,9 +128,10 @@ for x in range(2, 7):
     print(x)
 ```
 
-Loop while input
+### While Loops
 
-``` python
+Loop while input:
+```python
 # Loop while a condition is being met
 run = "y"
 while run == "y":
@@ -142,9 +139,37 @@ while run == "y":
     run = input("To run again. Enter 'y'")
 ```
 
-Breaks
+Loop with increment:
+```python
+i = 1
+while i < 6:
+	print(i)
+	i+=1
+```
 
-``` python
+While true stoppable:
+```python
+uniform = True
+while(uniform):
+	# Ring up customers
+```
+
+Infinite loop:
+```python
+while True:
+    print("hi")
+```
+
+While not loop:
+```python
+while not hash.startswith("00000000"):
+    count += 1
+    hash = hash_number(count)
+```
+
+### Breaks
+
+```python
 desired_number = 5
 for x in range(10):
     if (x == desired_number):
@@ -152,41 +177,12 @@ for x in range(10):
     print(x)
 ```
 
-loop with increment
+### Different Looping Techniques
 
-```` python
-i = 1
-while i < 6:
-	print(i)
-	i+=1
-````
-
-while true stoppable
-
-``` python
-uniform = True
-while(uniform):
-	# Ring up customers
-```
-
-infinite loop
-
-``` python
-while True:
-    print("hi")
-```
-
-while not loop
-``` python
-while not hash.startswith("00000000"):
-    count += 1
-    hash = hash_number(count)
-```
-
-different looping techniques, [i] and enumerate
+Different looping techniques, [i] and enumerate:
 https://treyhunner.com/2016/04/how-to-loop-with-indexes-in-python/
 
-``` python
+```python
 # 1/3 normal technique:
 colors = ["red", "green", "blue", "purple"]
 for color in colors:
@@ -210,44 +206,33 @@ Using `pass` doesn't actually do anything. It just makes things syntactically co
 
 ## Functions
 
-
-return output, nicely said
-``` python
+Return output, nicely said:
+```python
 def something(article):
     return output
 result = something(crude_oil_articles)
 ```
 
-list comprehension
-``` python
+List comprehension:
+```python
 coding_complete_pdf = [each + ".pdf" for each in coding_complete]
 ```
 
-multiline list comprehension
-``` python
+Multiline list comprehension:
+```python
 money_news_ids = [
     doc
     for doc in all_docs_id
     if categories[0] in reuters.categories(doc)
     or categories[1] in reuters.categories(doc)
 ]
-vs
+# vs
 money_news_ids = [ doc for doc in all_docs_id if categories[0] in reuters.categories(doc) or categories[1] in reuters.categories(doc)]
 ```
 
-dictionary comprehension
-``` python
+Dictionary comprehension:
+```python
 metrics = {k: v for k, v in zip(model.metrics_names, scores)}
-```
-
-apply function to dataframe column
-``` python
-def changeGender(gender):
-    if gender == "Male":
-        return 1
-    else:
-        return 0
-df["Gender"] = df["Gender"].apply(changeGender)
 ```
 
 ### Docstring
@@ -256,30 +241,26 @@ df["Gender"] = df["Gender"].apply(changeGender)
 
 Some languages, including Python, have the idea of a "docstring." The idea of a docstring is pretty simple: If the first line of the function is a string, then the string is seen as the documentation for that function.
 
-[Python's PEP 257](https://t.dripemail2.com/c/eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZXRvdXIiLCJpc3MiOiJtb25vbGl0aCIsInN1YiI6ImRldG91cl9saW5rIiwiaWF0IjoxNjU4NzI2MDU5LCJuYmYiOjE2NTg3MjYwNTksImFjY291bnRfaWQiOiI2MTY4MjE4IiwiZGVsaXZlcnlfaWQiOiJ0MXgwbXdjdjFrMDZ6NXVoZWltMSIsInVybCI6Imh0dHBzOi8vd3d3LnB5dGhvbi5vcmcvZGV2L3BlcHMvcGVwLTAyNTcvP19fcz00bW9nYnNrcDNqOW1maTR5Nzd0ZyZ1dG1fc291cmNlPWRyaXAmdXRtX21lZGl1bT1lbWFpbCZ1dG1fY2FtcGFpZ249TmV3c2xldHRlciUzQStCZXR0ZXIrZGV2ZWxvcGVycyZ1dG1fY29udGVudD0lNUJCZXR0ZXIrZGV2ZWxvcGVycyU1RCtDb21tZW50cyt2cy4rQVBJK2RvY3MifQ.zxlEozhkE7X_8oprEy0woD2S3Md4WEhFY7mnAPpE5_Q) ("Docstring conventions") suggests that docstrings should always be triple-quoted strings. Also, the closing triple quotes are on a line by themselves. This is considered to be optimal style in Python, in part so that Emacs can format the docstring.
+[Python's PEP 257](https://www.python.org/dev/peps/pep-0257/) ("Docstring conventions") suggests that docstrings should always be triple-quoted strings. Also, the closing triple quotes are on a line by themselves. This is considered to be optimal style in Python, in part so that Emacs can format the docstring.
 
-Documentation for a function should indicate three things: (1) What it expects/requires as inputs, (2) what it modifies, and (3) what it returns. If you document all three of these for every function you write, you're way ahead of the game.  Providing examples is just icing on the cake.
+Documentation for a function should indicate three things: (1) What it expects/requires as inputs, (2) what it modifies, and (3) what it returns. If you document all three of these for every function you write, you're way ahead of the game. Providing examples is just icing on the cake.
 
 Docstrings and comments are aimed at completely different audiences. Comments should be written so that someone can debug, maintain, and improve your code. Docstrings are aimed at a much larger audience, and should thus make it easy for someone to understand what your function does, how to run it, and what it returns.
 
-## Strings
+## Packages
 
-docstring with variables
-``` python
-"""Thank you for your information;
-you can get {} Bitcoins for your {} US Dollars.
-""".format(btc_value, usd_amount)
-```
+6-20 in pdf LearningTree slides.
 
-format string with many variables
-``` python
-bucket = "s3://{}/{}/train/{}".format(bucket, prefix, key)
-```
+These are a directory of modules, which contain metadata (version, dependencies). Just a bunch of folders with modules.
 
-Krystal path technique
-``` python
-titanic = pd.read_csv(r'C:\heeey\titanic.csv')
-```
+The package directory must be within the search path (e.g. c:\course\files)
+A common location is `site-packages`. The package directory must contain `__init__.py`.
+
+site-packages dir = c:\python\python310 > Lib > site-packages
+
+In PyCharm > New > Python Package - creates a package.
+
+Each directory in the directory becomes its own namespace, where directory1.nested_directory, the "." becomes a qualified name.
 
 ## Scope
 
@@ -289,11 +270,8 @@ LEGB - local enclosing global builtin.
 3. Global: within the module or file
 4. Built-in: within the Python builtin module
 
+Python's namespace is a dictionary that it contains. You have a local dictionary, enclosing dictionary, global dictionary, builtin dictionary (LEGB). e.g.:
 
-Python's namespace is a dictionary that it contains. You have a local dictionary, enclosing dictionary, global dictionary, builtin dictionary (LEGB). , e.g.:
-enclosed var: local
-enclosing var: enclosing
-global var: global
 ```python
 var = 'global'
 def fun1():
@@ -310,9 +288,16 @@ fun1()
 print('global var:', var)
 ```
 
+Output:
+```
+enclosed var: local
+enclosing var: enclosing
+global var: global
+```
+
 ## Namespace and `__main__`
 
-Examine the namespace with dir()
+Examine the namespace with dir():
 ```python
 dir()
 
@@ -325,13 +310,10 @@ this.__name__
 for k, v in math.__dict__.items():
 	print(k, "*****", v)
 ```
-> displays namespace
-> 'math'
-> 'this'
 
-__name__ is equal to __main__ when a module is running as a standalone program. __name__ is equal to the module name when it the module is imported. You can test this to conditionally execute module testing code, but only when the script isn't imported.
+__name__ is equal to __main__ when a module is running as a standalone program. __name__ is equal to the module name when the module is imported. You can test this to conditionally execute module testing code, but only when the script isn't imported.
 
-create main_script.py
+Create main_script.py:
 ```python
 class Person:
     def __init__(self, name):
@@ -349,25 +331,42 @@ if __name__ == '__main__':
 else:
     print("I have been imported", __name__)
 ```
-> I am main, my name is __main__
-> Person constructor ok
 
-main_importer.py
+Output when run directly:
+```
+I am main, my name is __main__
+Person constructor ok
+```
+
+main_importer.py:
 ```python
 import main_script
 ```
-> I have been imported name_check
 
-## Packages
-6-20 in pdf LearningTree slides.
+Output when imported:
+```
+I have been imported main_script
+```
 
-These are a directory of modules, which contain metadata (version, dependencies). Just a bunch of folders with modules.
+To print all class attributes:
+```python
+vars(mycat)
+# This is the same thing as:
+mycat.__dict__
+```
 
-The package directory must be within the search path (e.g. c:\course\files)
-A common location is `site-packages`. The package directory must contain `__init__.py`.
+Use case:
+```python
+import airlineclasses
 
-site-packages dir = c:\python\python310 > Lib > site-packages
+flight_data = (221, 'HNL', 'HNL', '2022-01-03 08:30', '2022-01-03 15:40', 399.99, 2)
+flight_attributes = ('flightnum', 'departcity', 'arrivecity', 'departdaytime', 'arrivedaytime', 'cost', 'code')
+data = dict(zip(flight_attributes, flight_data))
+this_flight = airlineclasses.Flight(**data)
+print("this_flight:", vars(this_flight))
+```
 
-In PyCharm > New > Python Package - creates a package.
-
-Each directory in the directory becomes it's own namespace, where directory1.nested_directory, the "." becomes a qualified name.
+Output:
+```
+this_flight: {'flightnum': 221, 'cost': 399.99, 'code': 2, 'departcity': 'HNL', 'arrivecity': 'HNL', 'departdaytime': '2022-01-03 08:30', 'arrivedaytime': '2022-01-03 15:40'}
+```

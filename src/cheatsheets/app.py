@@ -30,6 +30,9 @@ except ImportError:
 class CheatsheetManager(App):
     """A Textual app for browsing cheatsheets"""
     
+    # Set default theme to Dracula
+    THEME = "dracula"
+    
     CSS = (
         "#sidebar {\n"
         "    width: 30%;\n"
@@ -64,7 +67,25 @@ class CheatsheetManager(App):
     
     def __init__(self, cheatsheets_dir=None):
         super().__init__()
-        self.cheatsheets_dir = Path(cheatsheets_dir or Path.home() / "cheatsheets")
+        # Default to the cheatsheets subdirectory, handling different scenarios
+        if cheatsheets_dir is None:
+            # Try to find the cheatsheets directory intelligently
+            current_dir = Path.cwd()
+            
+            # Check if we're already in the project root (has pyproject.toml)
+            if (current_dir / "pyproject.toml").exists() and (current_dir / "cheatsheets").exists():
+                cheatsheets_dir = current_dir / "cheatsheets"
+            # Check if we're in a subdirectory and need to go up to find the project root
+            elif (current_dir.parent / "pyproject.toml").exists() and (current_dir.parent / "cheatsheets").exists():
+                cheatsheets_dir = current_dir.parent / "cheatsheets"
+            # Check if we're in the cheatsheets directory itself
+            elif current_dir.name == "cheatsheets" and (current_dir / "git.md").exists():
+                cheatsheets_dir = current_dir
+            # Fallback to current directory / cheatsheets
+            else:
+                cheatsheets_dir = current_dir / "cheatsheets"
+        
+        self.cheatsheets_dir = Path(cheatsheets_dir)
         self.cheatsheets = {}
         self.filtered_cheatsheets = {}
         self.file_contents = {}  # Cache for file contents
@@ -137,18 +158,18 @@ class CheatsheetManager(App):
             if name in self.search_results:
                 sections = self.search_results[name]
                 if len(sections) == 1:
-                    # Show single section
-                    label_text = f"{i:2d}. {name.lower()} (section: {sections[0]})"
+                    # Show single section name
+                    label_text = f"{i:2d} - {name.lower()} ({sections[0]})"
                 elif len(sections) <= 3:
-                    # Show multiple sections
+                    # Show multiple section names
                     sections_str = ", ".join(sections)
-                    label_text = f"{i:2d}. {name.lower()} (sections: {sections_str})"
+                    label_text = f"{i:2d} - {name.lower()} ({sections_str})"
                 else:
-                    # Show count and first few sections if many matches
+                    # Show first few section names if many matches
                     sections_str = ", ".join(sections[:2])
-                    label_text = f"{i:2d}. {name.lower()} ({len(sections)} sections: {sections_str}...)"
+                    label_text = f"{i:2d} - {name.lower()} ({sections_str}, +{len(sections)-2})"
             else:
-                label_text = f"{i:2d}. {name.lower()}"
+                label_text = f"{i:2d} - {name.lower()}"
             
             label = Label(label_text, classes="list-item-label")
             list_item = ListItem(label)
@@ -191,18 +212,31 @@ class CheatsheetManager(App):
         return '\n'.join(numbered_lines)
 
     def _render_cheatsheet(self, filepath):
-        """Render markdown file in the content panel"""
+        """Render markdown file in the content panel with search term highlighting"""
         try:
             with open(filepath, 'r', encoding='utf-8') as f:
                 content = f.read()
+            
+            # Get current search term from the input widget
+            search_input = self.query_one("#search-input", Input)
+            current_search = search_input.value.strip()
+            
+            # If there's a search term, highlight it in the content
+            if current_search:
+                content = self._highlight_search_terms(content, current_search)
             
             content_widget = self.query_one("#content", Markdown)
             content_widget.update(content)
             
             # Update status
-            self.query_one("#status", Static).update(
-                f"Viewing: {filepath.stem} | Press 'r' to refresh, 'q' to quit"
-            )
+            if current_search:
+                self.query_one("#status", Static).update(
+                    f"Viewing: {filepath.stem} | Search: '{current_search}' highlighted"
+                )
+            else:
+                self.query_one("#status", Static).update(
+                    f"Viewing: {filepath.stem} | Press 'r' to refresh, 'q' to quit"
+                )
             
         except FileNotFoundError:
             content_widget = self.query_one("#content", Markdown)
@@ -210,7 +244,23 @@ class CheatsheetManager(App):
         except Exception as e:
             content_widget = self.query_one("#content", Markdown)
             content_widget.update(f"## Error reading file: {e}")
-    
+
+    def _highlight_search_terms(self, content: str, search_term: str) -> str:
+        """Highlight search terms in markdown content using markdown syntax"""
+        if not search_term:
+            return content
+        
+        import re
+        
+        # Use case-insensitive regex to find all occurrences
+        # Use word boundaries to avoid partial matches in code blocks where possible
+        pattern = re.compile(re.escape(search_term), re.IGNORECASE)
+        
+        # Replace matches with highlighted version using markdown bold syntax
+        highlighted_content = pattern.sub(f"**{search_term}**", content)
+        
+        return highlighted_content
+
     def _load_file_contents(self):
         """Load and cache contents of all markdown files for searching"""
         self.file_contents = {}
