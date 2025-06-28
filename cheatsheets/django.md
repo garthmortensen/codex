@@ -1,5 +1,17 @@
 # django.md
 
+## About
+**Name:** Django (named after Django Reinhardt, a famous jazz guitarist, reflecting the creators' admiration for his improvisational skill and creativity)
+
+**Created:** Released in 2005 by Adrian Holovaty and Simon Willison, Django was created to help developers build web applications quickly and with less code. Its purpose is to provide a high-level Python web framework that encourages rapid development and clean, pragmatic design.
+
+**Similar Technologies:** Flask, FastAPI, Ruby on Rails, Laravel, Express.js, Spring
+
+**Plain Language Definition:**
+Django is a toolkit for building websites and web apps using Python. It handles much of the hassle of web development, so you can focus on writing your app instead of reinventing the wheel.
+
+---
+
 ## Project Setup
 
 ```bash

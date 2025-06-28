@@ -1,5 +1,18 @@
 # cz.md
 
+## About
+**Name:** Commitizen (cz) - named for helping developers become "citizens" of consistent commit practices.
+
+**Created:** Developed to standardize commit messages and automate versioning in software projects. It emerged from the need to make git commit histories more readable and meaningful, especially in teams where different developers had varying commit message styles.
+
+**Similar Technologies:** Conventional Commits, semantic-release, git hooks, husky, lint-staged, standard-version
+
+**Plain Language Definition:** Commitizen is a tool that guides you through creating well-formatted commit messages. It's like having a template that ensures everyone on your team writes git commits in the same clear, organized way, making it easier to track changes and automatically generate release notes.
+
+---
+
+# cz.md
+
 ## Commit Operations
 
 ```bash

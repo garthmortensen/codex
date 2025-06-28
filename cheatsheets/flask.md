@@ -1,5 +1,18 @@
 # flask.md
 
+## About
+
+**Name:** Flask (a playful reference to the 'Bottle' web framework and the idea of a small container for serving web content)
+
+**Created:** Released in 2010 by Armin Ronacher, Flask was created as a lightweight and flexible web framework for Python. Its purpose is to provide the basics for web development without imposing structure, letting developers add only what they need.
+
+**Similar Technologies:** Django, FastAPI, Bottle, CherryPy, Express.js
+
+**Plain Language Definition:**
+Flask is a simple toolkit for building web apps in Python. It gives you just enough to get started, so you can build your app your way.
+
+---
+
 ## Basic Setup
 
 ```python

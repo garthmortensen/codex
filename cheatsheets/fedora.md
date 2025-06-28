@@ -1,5 +1,17 @@
 # fedora.md
 
+## About
+**Name:** Fedora (named after the type of hat featured in the Red Hat logo, reflecting its sponsorship by Red Hat)
+
+**Created:** Launched in 2003 by the Fedora Project and sponsored by Red Hat, Fedora was created as a free, community-driven Linux distribution. Its purpose is to provide the latest open-source software in a stable, secure, and innovative operating system.
+
+**Similar Technologies:** Ubuntu, Debian, openSUSE, Arch Linux, CentOS
+
+**Plain Language Definition:**
+Fedora is a free Linux operating system that gives you the newest open-source software and tools, making it great for developers and everyday users alike.
+
+---
+
 ## Package Management - DNF
 
 ```bash

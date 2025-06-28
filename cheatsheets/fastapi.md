@@ -1,5 +1,17 @@
 # fastapi.md
 
+## About
+**Name:** FastAPI (the name highlights its goal: to provide a fast, high-performance framework for building APIs quickly and efficiently)
+
+**Created:** Released in 2018 by Sebastián Ramírez, FastAPI was created to make building APIs with Python fast, easy, and robust. Its purpose is to provide a modern, high-performance web framework for building APIs with automatic validation and documentation.
+
+**Similar Technologies:** Flask, Django REST Framework, Express.js, Spring Boot, Falcon
+
+**Plain Language Definition:**
+FastAPI is a tool for quickly building web APIs in Python. It helps you create fast, reliable, and well-documented APIs with less effort.
+
+---
+
 ## Basic Setup
 
 ```python

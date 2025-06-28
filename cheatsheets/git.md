@@ -1,5 +1,103 @@
 # git.md
 
+## About
+**Name:** Git (the name was chosen by its creator, Linus Torvalds, as a self-deprecating joke; "git" is British slang for an unpleasant person, and Torvalds wanted a short, unique, and memorable name.)
+
+**Created:** Git was created in 2005 by Linus Torvalds to manage the development of the Linux kernel after a dispute with the maintainers of BitKeeper, a proprietary version control system. Its purpose is to provide a fast, distributed, and robust version control system for tracking changes in source code during software development.
+
+**Similar Technologies:** Mercurial, Subversion (SVN), Perforce, CVS, Bazaar
+
+**Plain Language Definition:**
+Git is a tool that helps you keep track of changes to your files and collaborate with others. It lets you save versions of your work, go back to previous versions, and work with teammates without overwriting each other's changes.
+
+---
+
+# High level intro to git
+
+## A basic overview
+
+### Git is not easy
+
+The following language is somewhat inaccurate in order to present a quick, simplified intro.
+
+This is written with the expectation that before using git, you'll pursue additional learning.
+
+### Version control
+
+Version control allows you to track changes to files and manage different versions of your project. This makes it easier to collaborate with others.
+
+It's like a multi-dimensional time machine for your project.
+
+### Git - Distributed VCS
+
+Git is a software solution. You can use it in many programs or directly in terminal.
+
+It's a "distributed version control system" that allows you to work on your project locally, and maintain a history of file changes.
+
+### .git/
+
+The mechanisms of each git project are contained within a `.git` folder in your project's directory.
+
+Starting out, simply think of it as a black box that each project needs.
+
+### Repository, aka repo
+
+A repo is like a folder that contains all files and the history of a project. It's the place where your project is stored.
+
+### Local and Remote repos
+
+Git is distributed. Data (your code) can be stored in multiple places.
+
+#### Local
+
+The local repo is on your (DOVE) computer. It's on the filesystem, where you write and run your code. It's just a local directory, which contains a `.git` folder.
+
+#### Remote
+
+This is hosted on a remote server. For us, this is a central hub (GitLab) where we upload local files to. 
+
+It's a bit like Sharepoint, but for code.
+
+### Clone - copying a repo to local
+
+Cloning a repo means copying code from a remote repo to your local computer. This allows you to work on a project.
+
+`git clone https://....`
+
+### Commit
+
+You can commit code to create a save state. As such, you can checkout (load) earlier versions of the code. 
+
+Think time traveling.
+
+### Push
+
+When you want to send your local changes to GitLab, you `push`.
+
+### Pull
+
+When you want to download changes from GitLab, you `pull`.
+
+### Branch for parallel development
+
+Git allows you to create branches, which are separate lines of development.
+
+You can work on new additions to the code in isolation, making it easier to manage your project. When everything looks good, you can merge this change branch into the existing code base.
+
+Maybe it's like traveling across dimensions?
+
+### Git is not easy
+
+Most people do not learn git in a week, or even a year.
+
+Learning git is much easier while working on solo projects. 
+
+Jumping straight into a collaborative project is more difficult.
+
+### Failsafe approach
+
+xcid comic
+
 ## Basic Operations
 
 ```bash

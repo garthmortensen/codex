@@ -1,5 +1,17 @@
 # docker.md
 
+## About
+**Name:** Docker (refers to dock workers who load and unload containers from ships; Docker 'packages' applications into containers, similar to shipping containers)
+
+**Created:** Released in 2013 by Solomon Hykes, Docker was created to make it easier to package, distribute, and run applications in isolated environments called containers. Its purpose is to simplify software deployment and ensure consistency across different systems.
+
+**Similar Technologies:** Podman, LXC/LXD, rkt, containerd, Vagrant, Kubernetes (for orchestration)
+
+**Plain Language Definition:**
+Docker lets you put your app and everything it needs into a container, so it runs the same way anywhere—on your computer, a server, or the cloud.
+
+---
+
 ## Container Management
 
 ```bash

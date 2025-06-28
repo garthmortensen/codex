@@ -1,5 +1,17 @@
 # uv.md
 
+## About
+**Name:** uv (a play on 'ultraviolet', suggesting something fast, lightweight, and modern for Python package management)
+
+**Created:** uv is a modern Python package manager and virtual environment tool, created by Astral (the maintainers of Ruff) and first released in 2023. Its purpose is to provide a faster, more reliable, and user-friendly alternative to pip and venv for managing Python dependencies and environments.
+
+**Similar Technologies:** pip, pipenv, poetry, conda, hatch, rye
+
+**Plain Language Definition:**
+uv is a tool that helps you install Python packages and manage project environments quickly and easily, making Python development smoother.
+
+---
+
 ## Project Management
 
 ```bash

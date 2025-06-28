@@ -1,5 +1,17 @@
 # tmux.md
 
+## About
+**Name:** tmux (stands for 'terminal multiplexer', describing its ability to split and manage multiple terminal sessions in one window)
+
+**Created:** Released in 2007 by Nicholas Marriott, tmux was created to let users manage multiple terminal sessions from a single window. Its purpose is to allow splitting, detaching, and reattaching terminal sessions for better productivity.
+
+**Similar Technologies:** GNU Screen, byobu, dvtm, terminator, tilix
+
+**Plain Language Definition:**
+tmux lets you split your terminal into multiple panes and keep your work running even if you disconnect, making multitasking in the terminal much easier.
+
+---
+
 ## Sessions
 
 - `tmux new -s <name>`: Start a new session.

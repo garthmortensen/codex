@@ -1,5 +1,18 @@
 # graphql.md
 
+## About
+
+**Name:** GraphQL (stands for 'Graph Query Language', reflecting its ability to query data structured as a graph)
+
+**Created:** Developed by Facebook in 2012 and released publicly in 2015, GraphQL was created to provide a more efficient, flexible, and powerful alternative to REST APIs. Its purpose is to let clients request exactly the data they need and nothing more.
+
+**Similar Technologies:** REST, gRPC, OData, Falcor, SOAP
+
+**Plain Language Definition:**
+GraphQL is a way for apps to ask for exactly the data they want from a server, making data fetching more flexible and efficient than traditional APIs.
+
+---
+
 ## Basic Query Syntax
 
 ```graphql

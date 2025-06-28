@@ -30,35 +30,42 @@ except ImportError:
 class CheatsheetManager(App):
     """A Textual app for browsing cheatsheets"""
     
-    # Set default theme to Dracula
-    THEME = "dracula"
+    # Set default theme to Dracula - use the correct attribute name
+    DEFAULT_CSS = """
+    App {
+        background: $surface;
+    }
     
-    CSS = (
-        "#sidebar {\n"
-        "    width: 30%;\n"
-        "    border-right: solid $primary;\n"
-        "}\n"
-        "#content-panel {\n"
-        "    width: 70%;\n"
-        "    padding: 1;\n"
-        "}\n"
-        "#search-input {\n"
-        "    margin: 1 0;\n"
-        "}\n"
-        ".list-item-label {\n"
-        "    padding: 0 1;\n"
-        "}\n"
-        "#status {\n"
-        "    height: 3;\n"
-        "    background: $surface;\n"
-        "    border-top: solid $primary;\n"
-        "    padding: 1;\n"
-        "}\n"
-    )
+    #sidebar {
+        width: 30%;
+        border-right: solid $primary;
+    }
+    
+    #content-panel {
+        width: 70%;
+        padding: 1;
+    }
+    
+    #search-input {
+        margin: 1 0;
+    }
+    
+    .list-item-label {
+        padding: 0 1;
+    }
+    
+    #status {
+        height: 3;
+        background: $surface;
+        border-top: solid $primary;
+        padding: 1;
+    }
+    """
     
     BINDINGS = [
         Binding("q", "quit", "Quit"),
         Binding("ctrl+f", "focus_search", "Search"),
+        Binding("ctrl+d", "toggle_dark", "Toggle theme"),
     ]
     
     # Reactive attributes
@@ -67,6 +74,8 @@ class CheatsheetManager(App):
     
     def __init__(self, cheatsheets_dir=None):
         super().__init__()
+        # Set theme in constructor
+        self.theme = "dracula"
         # Default to the cheatsheets subdirectory, handling different scenarios
         if cheatsheets_dir is None:
             # Try to find the cheatsheets directory intelligently
@@ -93,7 +102,7 @@ class CheatsheetManager(App):
         
     def compose(self) -> ComposeResult:
         """Create child widgets for the app"""
-        yield Header(show_clock=True)
+        yield Header(show_clock=False)
         
         with Horizontal():
             with Vertical(id="sidebar"):
@@ -113,6 +122,13 @@ class CheatsheetManager(App):
         """Called when app starts"""
         self.title = "Cheatsheet Manager"
         self.sub_title = str(self.cheatsheets_dir)
+        # Force set the theme after mounting
+        self.dark = True  # Ensure dark mode is enabled
+        try:
+            self.theme = "dracula"
+        except Exception:
+            # Fallback if dracula theme not available
+            self.theme = "dark"
         self._discover_cheatsheets()
         self._update_list()
         
@@ -352,6 +368,17 @@ class CheatsheetManager(App):
     def action_focus_search(self) -> None:
         """Focus the search input field."""
         self.query_one("#search-input", Input).focus()
+
+    def action_toggle_dark(self) -> None:
+        """Toggle between dark and light themes"""
+        self.dark = not self.dark
+        if self.dark:
+            try:
+                self.theme = "dracula"
+            except Exception:
+                self.theme = "dark"
+        else:
+            self.theme = "light"
 
 def main():
     """Main entry point for the application"""

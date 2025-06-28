@@ -1,5 +1,17 @@
 # grep.md
 
+## About
+**Name:** grep (stands for 'global regular expression print', from the ed editor command g/re/p, meaning 'globally search for a regular expression and print matching lines')
+
+**Created:** Created in 1973 by Ken Thompson for Unix, grep stands for "global regular expression print." Its purpose is to search for patterns in text using regular expressions.
+
+**Similar Technologies:** ack, ag (The Silver Searcher), ripgrep (rg), sed, awk
+
+**Plain Language Definition:**
+grep is a command-line tool that lets you quickly search for words or patterns in files or text.
+
+---
+
 ## Grep - Pattern Matching
 
 ```bash

@@ -1,5 +1,17 @@
 # regex.md
 
+## About
+**Name:** Regular Expressions (regex) (short for 'regular expression', a term from formal language theory describing a pattern that defines a set of strings)
+
+**Created:** The concept of regular expressions was introduced by Stephen Cole Kleene in the 1950s for mathematical notation, and later adapted for text processing in Unix in the 1970s. Its purpose is to describe patterns in text for searching, matching, and manipulation.
+
+**Similar Technologies:** glob patterns, wildcards, awk, sed, string methods, pattern matching libraries
+
+**Plain Language Definition:**
+A regular expression (regex) is a special way to describe a search pattern, so you can find, match, or replace text that follows certain rules.
+
+---
+
 ## Basic Patterns
 
 ```bash

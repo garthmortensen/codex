@@ -1,5 +1,17 @@
 # slurm.md
 
+## About
+**Name:** SLURM (Simple Linux Utility for Resource Management; the name is an acronym describing its function as a resource manager for clusters)
+
+**Created:** Developed in 2002 by Lawrence Livermore National Laboratory, SLURM was created to manage and schedule jobs on large Linux clusters and supercomputers. Its purpose is to allocate resources and schedule jobs efficiently in high-performance computing (HPC) environments.
+
+**Similar Technologies:** PBS, LSF, Grid Engine, Torque, HTCondor
+
+**Plain Language Definition:**
+SLURM is a tool that helps supercomputers and clusters share their resources and run lots of jobs in an organized way.
+
+---
+
 ## Job Submission
 
 ```bash
