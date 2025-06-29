@@ -33,3 +33,14 @@ ASCII book by Donovan Bake.
    ```bash
    alias codex='cd ~/codex && uv run python src/codex/app.py'
    ```
+
+## Use
+
+1. Main screen contains 3 panes. Top left pane is the search bar. Left pane is list of all markdown files in program subdirectory. Right pane is splash screen image.
+![main_screen](images/main_screen.png)
+
+1. Select a cheatsheet to display content.
+![cheatsheet](images/cheatsheet.png)
+
+1. `Control-f` to search for text. Results will display in the below list.
+![search](images/search.png)
