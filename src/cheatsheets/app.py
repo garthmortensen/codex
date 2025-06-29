@@ -16,6 +16,9 @@ from textual.reactive import reactive
 from textual.message import Message
 from textual.binding import Binding
 
+import getpass
+import datetime
+
 # Try to import newer splitter widgets, fallback to basic containers
 try:
     from textual.widgets import VerticalSplitter, HorizontalSplitter
@@ -102,8 +105,7 @@ class CheatsheetManager(App):
         
     def compose(self) -> ComposeResult:
         """Create child widgets for the app"""
-        yield Header(show_clock=False)
-        
+        yield Header(show_clock=False)        
         with Horizontal():
             with Vertical(id="sidebar"):
                 yield Input(
@@ -112,9 +114,27 @@ class CheatsheetManager(App):
                 )
                 yield ListView(id="cheatsheet-list")
             
+            username = getpass.getuser()
+            year = str(datetime.datetime.now().year)
             with VerticalScroll(id="content-panel"):
-                yield Markdown("Select a cheatsheet to view", id="content")
-        
+                yield Markdown(
+                    f"""
+```ascii
+(\ 
+\\'\           __...--~~~~~-._   _.-~~~~~--...__
+ \\'\         //              `V' Codex         \\
+ / '|       //                |  by {username}
+ \\ '/      //                 |  anno {year}       \\
+   \      //__...--~~~~~~-._  |  _.-~~~~~~--....__\ 
+  (==)   //__.....----~~~~._\ | /_.~~~~----......__\\
+  (__)  ====================\|//=====================
+                            `---`
+```
+Codex organizes, searches, and displays technical references.
+
+""",
+                    id="content"
+                )
         yield Static("Ready | Use arrow keys to navigate, Enter to select", id="status")
         yield Footer()
     

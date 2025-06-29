@@ -1,13 +1,27 @@
-# README.md
+# Codex
 
-Cheatsheet Manager is a CL tool for organizing, searching, and displaying technical cheatsheets for quick reference.
+Codex organizes, searches, and displays technical references.
+
+```ascii
+(\ 
+\'\   
+ \'\          __...--~~~~~-._   _.-~~~~~--...__
+ / '|       //     codex     `V'               \\
+ \ '/      //                 |                 \\
+   \      //__...--~~~~~~-._  |  _.-~~~~~~--...__\\
+  (==)   //__.....----~~~~._\ | /_.~~~~----.....__\\
+  (__)  ====================\\|//====================
+                            `---`
+```
+
+ASCII book by Donovan Bake.
 
 ## First Time Setup
 
 1. clone:
    ```bash
-   git clone https://github.com/yourusername/cheatsheets.git
-   cd cheatsheets
+   git clone https://github.com/garthmortensen/codex
+   cd codex
    ```
 
 1. install dependencies:
@@ -17,5 +31,5 @@ Cheatsheet Manager is a CL tool for organizing, searching, and displaying techni
 
 1. for quick access, add alias to your shell (`.bashrc` or `.zshrc`):
    ```bash
-   alias cheat='cd ~/cheatsheets && uv run python src/cheatsheets/app.py'
+   alias codex='cd ~/codex && uv run python src/codex/app.py'
    ```
