@@ -1,0 +1,120 @@
+File: C:/Users/garth/Desktop/python self study\django_stack.md
+Sentences: 48
+Syllables: 1303
+Flesch reading ease score: 45.9
+Flesch-Kincaid grade level score: 10.8
+Linsear Write score: 0.4
+
+
+File: C:/Users/garth/Desktop/python self study\docker_2.md
+Sentences: 56
+Syllables: 2037
+Flesch reading ease score: 37.0
+Flesch-Kincaid grade level score: 13.2
+Linsear Write score: 0.2
+
+
+File: C:/Users/garth/Desktop/python self study\docker_bashrc.md
+Sentences: 62
+Syllables: 2001
+Flesch reading ease score: 35.8
+Flesch-Kincaid grade level score: 12.7
+Linsear Write score: 0.3
+
+
+File: C:/Users/garth/Desktop/python self study\docker_basics.md
+Sentences: 28
+Syllables: 1162
+Flesch reading ease score: 25.4
+Flesch-Kincaid grade level score: 15.2
+Linsear Write score: 1.4
+
+
+File: C:/Users/garth/Desktop/python self study\dunder.md
+Sentences: 35
+Syllables: 751
+Flesch reading ease score: 47.2
+Flesch-Kincaid grade level score: 9.7
+Linsear Write score: 0.3
+
+
+File: C:/Users/garth/Desktop/python self study\gunicorn_systemd.md
+Sentences: 38
+Syllables: 1121
+Flesch reading ease score: 35.5
+Flesch-Kincaid grade level score: 12.3
+Linsear Write score: 0.2
+
+
+File: C:/Users/garth/Desktop/python self study\listenerhook_fastapi.md
+Sentences: 11
+Syllables: 580
+Flesch reading ease score: 19.1
+Flesch-Kincaid grade level score: 17.6
+Linsear Write score: 3.7
+
+
+File: C:/Users/garth/Desktop/python self study\microservices.md
+Sentences: 34
+Syllables: 1227
+Flesch reading ease score: 22.1
+Flesch-Kincaid grade level score: 14.7
+Linsear Write score: 0.8
+
+
+File: C:/Users/garth/Desktop/python self study\promotion.md
+Sentences: 59
+Syllables: 1159
+Flesch reading ease score: 54.5
+Flesch-Kincaid grade level score: 8.6
+Linsear Write score: 0.3
+
+
+File: C:/Users/garth/Desktop/python self study\results.txt
+Sentences: 1
+Syllables: 678
+Flesch reading ease score: -301.9
+Flesch-Kincaid grade level score: 137.4
+Linsear Write score: 0.2
+
+
+File: C:/Users/garth/Desktop/python self study\reverse_proxy.md
+Sentences: 32
+Syllables: 1032
+Flesch reading ease score: 49.0
+Flesch-Kincaid grade level score: 11.3
+Linsear Write score: 0.5
+
+
+File: C:/Users/garth/Desktop/python self study\synch_asynch.md
+Sentences: 66
+Syllables: 2592
+Flesch reading ease score: 33.6
+Flesch-Kincaid grade level score: 14.0
+Linsear Write score: 0.3
+
+
+File: C:/Users/garth/Desktop/python self study\systemd_rest.md
+Sentences: 17
+Syllables: 735
+Flesch reading ease score: 15.5
+Flesch-Kincaid grade level score: 16.5
+Linsear Write score: 0.6
+
+
+File: C:/Users/garth/Desktop/python self study\tdd_vs_bdd.md
+Sentences: 17
+Syllables: 646
+Flesch reading ease score: 34.3
+Flesch-Kincaid grade level score: 13.8
+Linsear Write score: 1.9
+
+
+File: C:/Users/garth/Desktop/python self study\WSGI.md
+Sentences: 61
+Syllables: 1836
+Flesch reading ease score: 38.1
+Flesch-Kincaid grade level score: 12.1
+Linsear Write score: 0.3
+
+
