@@ -31,7 +31,8 @@ ASCII book by Donovan Bake.
 
 1. for quick access, add alias to your shell (`.bashrc` or `.zshrc`):
    ```bash
-   alias codex='cd ~/codex && uv run python src/codex/app.py'
+   # activate venv, run app and point to cheatsheets dir
+   alias codex='source ~/projects/codex/.venv/bin/activate && python ~/projects/codex/src/cheatsheets/app.py ~/projects/codex/cheatsheets'
    ```
 
 ## Use

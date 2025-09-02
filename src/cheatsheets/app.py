@@ -79,24 +79,10 @@ class CheatsheetManager(App):
         super().__init__()
         # Set theme in constructor
         self.theme = "dracula"
-        # Default to the cheatsheets subdirectory, handling different scenarios
+        # Default to the cheatsheets subdirectory
         if cheatsheets_dir is None:
-            # Try to find the cheatsheets directory intelligently
-            current_dir = Path.cwd()
-            
-            # Check if we're already in the project root (has pyproject.toml)
-            if (current_dir / "pyproject.toml").exists() and (current_dir / "cheatsheets").exists():
-                cheatsheets_dir = current_dir / "cheatsheets"
-            # Check if we're in a subdirectory and need to go up to find the project root
-            elif (current_dir.parent / "pyproject.toml").exists() and (current_dir.parent / "cheatsheets").exists():
-                cheatsheets_dir = current_dir.parent / "cheatsheets"
-            # Check if we're in the cheatsheets directory itself
-            elif current_dir.name == "cheatsheets" and (current_dir / "git.md").exists():
-                cheatsheets_dir = current_dir
-            # Fallback to current directory / cheatsheets
-            else:
-                cheatsheets_dir = current_dir / "cheatsheets"
-        
+            cheatsheets_dir = Path(__file__).parent.parent.parent / "cheatsheets"
+
         self.cheatsheets_dir = Path(cheatsheets_dir)
         self.cheatsheets = {}
         self.filtered_cheatsheets = {}
